@@ -1,0 +1,31 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<group android:checkableBehavior="all">
+<item android:checked="false" android:checkable="true" android:title="@string/austria" android:id="@+id/austria"/>
+<item android:checked="false" android:checkable="true" android:title="@string/burgenland" android:id="@+id/burgenland"/>
+<item android:checked="false" android:checkable="true" android:title="@string/carinthia" android:id="@+id/carinthia"/>
+<item android:checked="false" android:checkable="true" android:title="@string/loweraustria" android:id="@+id/loweraustria"/>
+<item android:checked="false" android:checkable="true" android:title="@string/upperaustria" android:id="@+id/upperaustria"/>
+<item android:checked="false" android:checkable="true" android:title="@string/salzburg" android:id="@+id/salzburg"/>
+<item android:checked="false" android:checkable="true" android:title="@string/styria" android:id="@+id/styria"/>
+<item android:checked="false" android:checkable="true" android:title="@string/tyrol" android:id="@+id/tyrol"/>
+<item android:checked="false" android:checkable="true" android:title="@string/vorarlberg" android:id="@+id/vorarlberg"/>
+<item android:checked="false" android:checkable="true" android:title="@string/vienna" android:id="@+id/vienna"/>
+<item android:checked="false" android:checkable="true" android:title="@string/a1" android:id="@+id/a1"/>
+<item android:checked="false" android:checkable="true" android:title="@string/a2" android:id="@+id/a2"/>
+<item android:checked="false" android:checkable="true" android:title="@string/a4" android:id="@+id/a4"/>
+<item android:checked="false" android:checkable="true" android:title="@string/a6" android:id="@+id/a6"/>
+<item android:checked="false" android:checkable="true" android:title="@string/a7" android:id="@+id/a7"/>
+<item android:checked="false" android:checkable="true" android:title="@string/a8" android:id="@+id/a8"/>
+<item android:checked="false" android:checkable="true" android:title="@string/a9" android:id="@+id/a9"/>
+<item android:checked="false" android:checkable="true" android:title="@string/a10" android:id="@+id/a10"/>
+<item android:checked="false" android:checkable="true" android:title="@string/a12" android:id="@+id/a12"/>
+<item android:checked="false" android:checkable="true" android:title="@string/a13" android:id="@+id/a13"/>
+<item android:checked="false" android:checkable="true" android:title="@string/a14" android:id="@+id/a14"/>
+<item android:checked="false" android:checkable="true" android:title="@string/a21" android:id="@+id/a21"/>
+<item android:checked="false" android:checkable="true" android:title="@string/a22" android:id="@+id/a22"/>
+<item android:checked="false" android:checkable="true" android:title="@string/a23" android:id="@+id/a23"/>
+<item android:checked="false" android:checkable="true" android:title="@string/bayern" android:id="@+id/bayern"/>
+<item android:checked="false" android:checkable="true" android:title="@string/berlin" android:id="@+id/berlin"/>
+<item android:checked="false" android:checkable="true" android:title="@string/hamburg" android:id="@+id/hamburg"/>
+</group>
+</menu>

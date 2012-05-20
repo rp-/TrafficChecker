@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:orientation="vertical">
+	<TextView
+		android:layout_height="wrap_content"
+		android:textAppearance="?android:attr/textAppearanceMedium"
+		android:text="Title"
+		android:id="@+id/listitemTVTitle"
+		android:layout_width="wrap_content"
+		android:paddingLeft="4dp"/>
+	<TextView
+		android:id="@+id/listtextview"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:textAppearance="?android:attr/textAppearanceSmall"
+		android:paddingLeft="8dp"
+		android:paddingBottom="3dp"
+		android:text="Text"/>
+</LinearLayout>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="NoRegionSelected">Bitte wählen sie eine oder mehrere Regionen aus.</string>
+	<string name="NoConnection">Fehler beim Versuch die Verkehrsmeldungen abzufragen.</string>
+	<string name="app_name">TrafficChecker</string>
+	<string name="mapview_name">MapView</string>
+	<string name="refresh">Aktualisieren</string>
+	<string name="traffic">Verkehr</string>
+	<string name="trafficShown">Verkehrsmeldungen ausblenden</string>
+	<string name="trafficHidden">Verkehrsmeldungen anzeigen</string>
+	<string name="roadWorksShown">Baustellen verstecken</string>
+	<string name="roadWorksHidden">Baustellen anzeigen</string>
+	<string name="roadworks">Baustellen</string>
+	<string name="map">Karte</string>
+	<string name="text">Text</string>
+	<string name="date">Datum</string>
+	<string name="selectRegion">Region auswählen...</string>
+	<string name="ok">Ok</string>
+  <string name="about">About</string>
+  <string name="refreshDialogText">Lade Verkehrsnachrichten...</string>
+  <string name="aboutdialogmessage">Author: Rene Peinthor\nVersion: %s \n\nAustrian traffic data provided by\nÖmtc(www.oeamtc.at)\nGerman traffic data provided by\nOneStepAhead(http://www.onestepahead.de)\nEngland traffic data provided by Highways Agency(http://www.highways.gov.uk)</string>
+  <string name="exit">Beenden</string>
+  <string name="orderbylocation">Sortiert p. Ortung</string>
+  <string name="orderbydate">Sortiert p. Datum</string>
+  <string name="first_start">Willkommen beim %s!\nSie haben noch keine Region ausgewählt, der Auswahldialog wird jetzt gestartet.</string>
+
+	<!-- State list -->
+	<!-- Austria -->
+	<string name="austria">Österreich (enthält nicht alle Nachrichten)</string>
+	<string name="burgenland">Burgenland</string>
+	<string name="carinthia">Kärnten</string>
+	<string name="loweraustria">Niederösterreich</string>
+	<string name="upperaustria">Oberösterreich</string>
+	<string name="salzburg">Salzburg</string>
+	<string name="styria">Steiermark</string>
+	<string name="tyrol">Tirol</string>
+	<string name="vorarlberg">Vorarlberg</string>
+	<string name="vienna">Wien</string>
+	<string name="a1">A1 West Autobahn</string>
+	<string name="a2">A2 Süd Autobahn</string>
+	<string name="a4">A4 Ost Autobahn</string>
+	<string name="a6">A6 Nordost Autobahn</string>
+	<string name="a7">A7 Mühlkreis Autobahn</string>
+	<string name="a8">A8 Innkreis Autobahn</string>
+	<string name="a9">A9 Phyrn Autobahn</string>
+	<string name="a10">A10 Tauern Autobahn</string>
+	<string name="a12">A12 Inntal Autobahn</string>
+	<string name="a13">A13 Brenner Autobahn</string>
+	<string name="a14">A14 Rheintal Autobahn</string>
+	<string name="a21">A21 Wiener Außenring Autobahn</string>
+	<string name="a22">A22 Donauufer Autobahn</string>
+	<string name="a23">A23 Südosttangente</string>
+	<!-- Germany -->
+	<string name="baden_wuerttemberg">Baden-Württemberg</string>
+	<string name="bayern">Bayern</string>
+	<string name="berlin">Berlin</string>
+	<string name="brandenburg">Brandenburg</string>
+	<string name="bremen">Bremen</string>
+	<string name="hamburg">Hamburg</string>
+	<string name="hessen">Hessen</string>
+	<string name="mecklenburg_vorpommern">Mecklenburg-Vorpommern</string>
+	<string name="niedersachsen">Niedersachsen</string>
+	<string name="nordrhein_westfalen">Nordrhein-Westfalen</string>
+	<string name="rheinland_pfalz">Rheinland-Pfalz</string>
+	<string name="saarland">Saarland</string>
+	<string name="sachsen">Sachsen</string>
+	<string name="sachsen_anhalt">Sachsen-Anhalt</string>
+	<string name="schleswig_holstein">Schleswig-Holstein</string>
+	<string name="thueringen">Thüringen</string>
+	
+	<!-- England -->
+	<string name="northeastengland">Nord Ost England</string>
+	<string name="northwestengland">Nord West England</string>
+	<string name="southeastengland">Süd Ost England</string>
+	<string name="southwestengland">Süd West England</string>
+	<string name="eastofengland">Ost England</string>
+	<string name="westmidlandsengland">West Midlands</string>
+	<string name="eastmidlandsengland">Ost Midlands</string>
+	<string name="en_m25">M25</string>
+	<string name="en_m1">M1</string>
+	<string name="en_m2">M2</string>
+	<string name="en_m3">M3</string>
+	<string name="en_m4">M4</string>
+	<string name="en_m5">M5</string>
+	<string name="en_m6">M6</string>
+	<string name="en_m62">M62</string>
+	<string name="en_a1m">A1(M)</string>
+	<string name="en_m40">M40</string>
+	<string name="en_m42">M42</string>
+	<string name="en_m621">M621</string>
+	<string name="en_m60">M60</string>
+	
+	<string-array name="countries_array">
+		<item>Österreich</item>
+		<item>Deutschland</item>
+		<item>England</item>
+	</string-array>
+</resources>
