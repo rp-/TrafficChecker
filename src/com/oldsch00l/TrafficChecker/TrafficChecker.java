@@ -423,13 +423,6 @@ public class TrafficChecker extends MapActivity {
 	public void onCreateContextMenu(ContextMenu menu, View v,
 	                                ContextMenuInfo menuInfo) {
 		super.onCreateContextMenu(menu, v, menuInfo);
-		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.regioncontext, menu);
-
-//		for( Integer id : RegionMap.keySet() ) {
-//			MenuItem regionItem = menu.findItem( id );
-//			regionItem.setChecked(RegionMap.get(id).isSelected());
-//		}
 	}
 
 	@Override
@@ -571,7 +564,7 @@ public class TrafficChecker extends MapActivity {
 			}
 		}
 
-		return retRegion == null ? RegionMap.get(R.id.austria) : retRegion;
+		return retRegion == null ? RegionMap.get("austria") : retRegion;
 	}
 
 	private String getSelectedRegions() {
