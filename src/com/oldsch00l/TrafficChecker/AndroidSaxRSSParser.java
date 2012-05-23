@@ -18,6 +18,8 @@
  *  along with TrafficChecker.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+// RSSParser is used for austria and england
+
 package com.oldsch00l.TrafficChecker;
 
 import java.util.ArrayList;
@@ -65,25 +67,25 @@ public class AndroidSaxRSSParser extends BaseFeedParser {
             		currentMessage.setTitle(title);
             }
         });
-//        item.getChild(LINK).setEndTextElementListener(new EndTextElementListener(){
-//            public void end(String link) {
-//            	if( !mSkipItem )
-//            	{
-//	            	if( link.startsWith("http://www.trafficengland.co.uk/map.aspx") )
-//	            	{
-//	            		//parse geo data
-//	                	GeoPoint point = parseGeoPoint(link);
-//	                	if( point != null)
-//	                	{
-//	                    	ArrayList<GeoPoint> geoList = new ArrayList<GeoPoint>();
-//	                		geoList.add( point);
-//	                		currentMessage.setGeoDataList( geoList );
-//	                	}
-//	            	}
-//	                currentMessage.setLink(link);
-//            	}
-//            }
-//        });
+        item.getChild(LINK).setEndTextElementListener(new EndTextElementListener(){
+            public void end(String link) {
+            	if( !mSkipItem )
+            	{
+	            	if( link.startsWith("http://www.trafficengland.co.uk/map.aspx") )
+	            	{
+	            		//parse geo data
+	                	GeoPoint point = parseGeoPoint(link);
+	                	if( point != null)
+	                	{
+	                    	ArrayList<GeoPoint> geoList = new ArrayList<GeoPoint>();
+	                		geoList.add( point);
+	                		currentMessage.setGeoDataList( geoList );
+	                	}
+	            	}
+	                currentMessage.setLink(link);
+            	}
+            }
+        });
         item.getChild(DESCRIPTION).setEndTextElementListener(new EndTextElementListener(){
             public void end(String body) {
                 currentMessage.setDescription(body);
