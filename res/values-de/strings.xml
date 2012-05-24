@@ -16,13 +16,13 @@
 	<string name="date">Datum</string>
 	<string name="selectRegion">Region auswählen...</string>
 	<string name="ok">Ok</string>
-  <string name="about">About</string>
-  <string name="refreshDialogText">Lade Verkehrsnachrichten...</string>
-  <string name="aboutdialogmessage">Author: Rene Peinthor\nVersion: %s \n\nAustrian traffic data provided by\nÖmtc(www.oeamtc.at)\nGerman traffic data provided by\nOneStepAhead(http://www.onestepahead.de)\nEngland traffic data provided by Highways Agency(http://www.highways.gov.uk)</string>
-  <string name="exit">Beenden</string>
-  <string name="orderbylocation">Sortiert p. Ortung</string>
-  <string name="orderbydate">Sortiert p. Datum</string>
-  <string name="first_start">Willkommen beim %s!\nSie haben noch keine Region ausgewählt, der Auswahldialog wird jetzt gestartet.</string>
+	<string name="about">About</string>
+	<string name="refreshDialogText">Lade Verkehrsnachrichten...</string>
+	<string name="aboutdialogmessage">Author: Rene Peinthor\nVersion: %s\nLizenz: GPLv3\nhttp://github.com/rp-/TrafficChecker\n\nAustrian traffic data provided by\nÖmtc(www.oeamtc.at)\nGerman traffic data provided by\nOneStepAhead(http://www.onestepahead.de)\nEngland traffic data provided by Highways Agency(http://www.highways.gov.uk)</string>
+	<string name="exit">Beenden</string>
+	<string name="orderbylocation">Sortiert p. Ortung</string>
+	<string name="orderbydate">Sortiert p. Datum</string>
+	<string name="first_start">Willkommen beim %s!\nSie haben noch keine Region ausgewählt, der Auswahldialog wird jetzt gestartet.</string>
 
 	<!-- State list -->
 	<!-- Austria -->

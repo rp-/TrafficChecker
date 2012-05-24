@@ -18,8 +18,9 @@
 	<string name="ok">Ok</string>
 	<string name="about">About</string>
 	<string name="refreshDialogText">Fetching traffic news...</string>
-	<string name="aboutdialogmessage">Author: Rene Peinthor\nVersion: %s \n\nAustrian traffic data provided by\nÖmtc(www.oeamtc.at)\nGerman traffic data provided by\nOneStepAhead(http://www.onestepahead.de)\nEngland traffic data provided by Highways Agency(http://www.highways.gov.uk)</string>
+	<string name="aboutdialogmessage">Author: Rene Peinthor\nVersion: %s \nLicense: GPLv3\nhttp://github.com/rp-/TrafficChecker\n\nAustrian traffic data provided by\nÖmtc(www.oeamtc.at)\nGerman traffic data provided by\nOneStepAhead(http://www.onestepahead.de)\nEngland traffic data provided by Highways Agency(http://www.highways.gov.uk)</string>
 	<string name="exit">Exit</string>
+	<string name="settings">Settings</string>
 	<string name="orderbylocation">Order by location</string>
 	<string name="orderbydate">Order by date</string>
 	<string name="first_start">Welcome to %s!\nYou have no regions selected, a selection dialog will therefore started now.</string>
