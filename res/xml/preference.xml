@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    <PreferenceCategory android:title="Filter">
+        <CheckBoxPreference android:title="Show traffic" android:key="traffic" android:summaryOn="@string/trafficShown" android:summaryOff="@string/trafficHidden" android:defaultValue="true"/>
+        <CheckBoxPreference android:key="roadworks" android:title="Show road works" android:summaryOn="@string/roadWorksShown" android:summaryOff="@string/roadWorksHidden" android:defaultValue="true"/>
+    </PreferenceCategory>
+    <ListPreference android:dialogTitle="Order by" android:entries="@array/orderby_array" android:key="orderby" android:title="@string/orderby" android:entryValues="@array/orderby_values" android:defaultValue="position"/>
+    
+
+</PreferenceScreen>

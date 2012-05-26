@@ -3,17 +3,9 @@
 	<item android:id="@+id/reload"
 		  android:title="@string/refresh"
 		  android:icon="@drawable/menu_refresh"/>
-	<item android:id="@+id/orderOption"
-		  android:title="@string/orderbylocation"
-		  android:checkable="true" />
-	<item android:id="@+id/trafficOption"
-		  android:title="@string/trafficShown"
-		  android:checkable="true" />
-	<item android:id="@+id/roadWorksOption"
-		  android:title="@string/roadWorksShown"
-		  android:checkable="true"/>
 	<item android:id="@+id/ViewSwitchMenu"
 		  android:checkable="true" android:checked="true" android:icon="@drawable/menu_map" android:title="@string/map"/>
-<item android:id="@+id/About" android:title="@string/about" android:icon="@drawable/about_menu"></item>
+<item android:id="@+id/menu_settings" android:title="@string/settings" android:icon="@android:drawable/ic_menu_preferences"></item><item android:id="@+id/About" android:title="@string/about" android:icon="@drawable/about_menu"></item>
 <item android:icon="@drawable/ic_lock_power_off" android:id="@+id/Exit" android:title="@string/exit"></item>
+
 </menu>

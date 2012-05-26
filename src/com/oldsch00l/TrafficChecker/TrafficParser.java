@@ -45,6 +45,7 @@ public class TrafficParser extends Thread {
 	private static HashMap<String, CacheTrafficEntries> cacheEntries = new HashMap<String, CacheTrafficEntries>();
 	public static final long cacheDiff = 180000;
 	private String mStringRegionList;
+	private String mOrderBy;
 	private java.util.List<Message> mResultList;
 	private ArrayList<Message.SubType> mSubTypeFilterList;
 	private Context mContext;
@@ -79,8 +80,7 @@ public class TrafficParser extends Thread {
 		Criteria crit = new Criteria();
 		crit.setAccuracy(Criteria.ACCURACY_FINE);
 		String provider = lm.getBestProvider(crit, true);
-		String order = TrafficProvider.getSetting(mContext.getContentResolver(), TrafficProvider.SET_ORDER);
-		if(provider != null && order.equals("location")) {
+		if(provider != null && mOrderBy.equals("location")) {
 			final Location loc = lm.getLastKnownLocation(provider);
 			Collections.sort(list, new Comparator<Message>() {
 				public int compare(Message mA, Message mB) {
@@ -128,9 +128,8 @@ public class TrafficParser extends Thread {
 	protected java.util.List<Message> getTrafficNewsRegion( TrafficRegion region) {
 		if( region == null )
 			return new java.util.ArrayList<Message>();
-		Log.v("parsing:", region.getRegionUrlAppend());
 		String url = region.getCountry().getUrl();
-		Log.v("parsing:", url);
+		Log.d("TrafficParser", url + "/" + region.getRegionUrlAppend());
 
 		if( (region.getCountry() == Country.Austria || region.getCountry() == Country.England) && !region.getRegionUrlAppend().equals("austria") )
 			url += "/" + region.getRegionUrlAppend();
@@ -319,10 +318,14 @@ public class TrafficParser extends Thread {
 		if( bTraffic )
 		{
 			mSubTypeFilterList.add(SubType.ROADCONDITION);
-			mSubTypeFilterList.add( SubType.TRAFFIC );
+			mSubTypeFilterList.add(SubType.TRAFFIC);
 		}
 		if( bRoadWorks )
-			mSubTypeFilterList.add( SubType.ROADWORKS );
+			mSubTypeFilterList.add(SubType.ROADWORKS);
+	}
+	
+	public void setOrderBy( String sOrder) {
+		mOrderBy = sOrder;
 	}
 
 	public void run() {

@@ -6,22 +6,23 @@
 	<string name="mapview_name">MapView</string>
 	<string name="refresh">Aktualisieren</string>
 	<string name="traffic">Verkehr</string>
-	<string name="trafficShown">Verkehrsmeldungen ausblenden</string>
-	<string name="trafficHidden">Verkehrsmeldungen anzeigen</string>
-	<string name="roadWorksShown">Baustellen verstecken</string>
-	<string name="roadWorksHidden">Baustellen anzeigen</string>
+	<string name="trafficShown">Verkehrsmeldungen werden angezeigt</string>
+	<string name="trafficHidden">Verkehrsmeldungen werden versteckt</string>
+	<string name="roadWorksShown">Baustellen werden angezeigt</string>
+	<string name="roadWorksHidden">Baustellen werden versteckt</string>
 	<string name="roadworks">Baustellen</string>
 	<string name="map">Karte</string>
 	<string name="text">Text</string>
 	<string name="date">Datum</string>
+	<string name="location">Position</string>
 	<string name="selectRegion">Region auswählen...</string>
 	<string name="ok">Ok</string>
 	<string name="about">About</string>
 	<string name="refreshDialogText">Lade Verkehrsnachrichten...</string>
 	<string name="aboutdialogmessage">Author: Rene Peinthor\nVersion: %s\nLizenz: GPLv3\nhttp://github.com/rp-/TrafficChecker\n\nAustrian traffic data provided by\nÖmtc(www.oeamtc.at)\nGerman traffic data provided by\nOneStepAhead(http://www.onestepahead.de)\nEngland traffic data provided by Highways Agency(http://www.highways.gov.uk)</string>
 	<string name="exit">Beenden</string>
-	<string name="orderbylocation">Sortiert p. Ortung</string>
-	<string name="orderbydate">Sortiert p. Datum</string>
+	<string name="settings">Einstellungen</string>
+	<string name="orderby">Sortiert per</string>
 	<string name="first_start">Willkommen beim %s!\nSie haben noch keine Region ausgewählt, der Auswahldialog wird jetzt gestartet.</string>
 
 	<!-- State list -->
@@ -94,5 +95,10 @@
 		<item>Österreich</item>
 		<item>Deutschland</item>
 		<item>England</item>
+	</string-array>
+	
+	<string-array name="orderby_array">
+	    <item>Datum</item>
+	    <item>Position</item>
 	</string-array>
 </resources>

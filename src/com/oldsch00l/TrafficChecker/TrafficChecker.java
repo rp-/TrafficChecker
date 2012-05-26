@@ -31,9 +31,11 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.KeyEvent;
@@ -306,13 +308,13 @@ public class TrafficChecker extends MapActivity {
 	}
 
 	public void updateTrafficNews(String sRegions) {
-		boolean bTraffic = false, bRoadWorks = false;
 		trafficParser = new TrafficParser( getApplicationContext(), mRefreshHandler);
-		if( TrafficProvider.getSettingAsInt(getContentResolver(), TrafficProvider.SET_TRAFFIC) == 1 )
-			bTraffic = true;
-		if( TrafficProvider.getSettingAsInt(getContentResolver(), TrafficProvider.SET_ROADWORKS) == 1 )
-			bRoadWorks = true;
+		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+		boolean bTraffic = sp.getBoolean("traffic", true);
+		boolean bRoadWorks = sp.getBoolean("roadworks", true);
+		String sOrder = sp.getString("orderby", "location");
 		trafficParser.setFilter(bTraffic, bRoadWorks);
+		trafficParser.setOrderBy(sOrder);
 		trafficParser.setRegionList(sRegions);
 		trafficParser.start();
 		showProgressDialog();
@@ -392,24 +394,6 @@ public class TrafficChecker extends MapActivity {
 		mOptionsMenu = menu;
 
 		//restore settings
-		MenuItem trafficItem = menu.findItem( R.id.trafficOption);
-		if( TrafficProvider.getSettingAsInt(getContentResolver(), TrafficProvider.SET_TRAFFIC) ==  1 )
-			flipMenuItem(trafficItem, true, R.string.trafficShown, R.drawable.menu_traffic_disabled);
-		else
-			flipMenuItem(trafficItem, false, R.string.trafficHidden, R.drawable.menu_traffic);
-
-		MenuItem roadWorksItem = menu.findItem( R.id.roadWorksOption);
-		if( TrafficProvider.getSettingAsInt(getContentResolver(), TrafficProvider.SET_ROADWORKS) == 1 )
-			flipMenuItem(roadWorksItem, true, R.string.roadWorksShown, R.drawable.menu_roadworks_disabled);
-		else
-			flipMenuItem(roadWorksItem, false, R.string.roadWorksHidden, R.drawable.menu_roadworks);
-
-		MenuItem orderItem = menu.findItem( R.id.orderOption);
-		if( TrafficProvider.getSetting(getContentResolver(), TrafficProvider.SET_ORDER).equals("location") )
-			flipMenuItem(orderItem, true, R.string.orderbylocation, R.drawable.menu_order_location);
-		else
-			flipMenuItem(orderItem, false, R.string.orderbydate, R.drawable.menu_order_date);
-
 		MenuItem viewSwitchItem = menu.findItem( R.id.ViewSwitchMenu);
 		if( TrafficProvider.getSetting(getContentResolver(), TrafficProvider.SET_VIEW).equals("map") )
 			flipMenuItem(viewSwitchItem, true, R.string.text, R.drawable.menu_text);
@@ -455,47 +439,13 @@ public class TrafficChecker extends MapActivity {
 			trafficParser.clearCache();
 			updateTrafficNews(getSelectedRegions());
 			return true;
-		case R.id.orderOption:
-			if( item.isChecked())
-			{
-				flipMenuItem(item, false, R.string.orderbydate, R.drawable.menu_order_date);
-				TrafficProvider.setSetting(getContentResolver(), TrafficProvider.SET_ORDER, "date");
-			}
-			else
-			{
-				flipMenuItem(item, true, R.string.orderbylocation, R.drawable.menu_order_location);
-				TrafficProvider.setSetting(getContentResolver(), TrafficProvider.SET_ORDER, "location");
-			}
-			updateTrafficNews(getSelectedRegions());
-			return true;
-		case R.id.trafficOption:
-			if( item.isChecked())
-			{
-				flipMenuItem(item, false, R.string.trafficHidden, R.drawable.menu_traffic);
-				TrafficProvider.setSetting(getContentResolver(), TrafficProvider.SET_TRAFFIC, "0");
-			}
-			else
-			{
-				flipMenuItem(item, true, R.string.trafficShown, R.drawable.menu_traffic_disabled);
-				TrafficProvider.setSetting(getContentResolver(), TrafficProvider.SET_TRAFFIC, "1");
-			}
-			updateTrafficNews(getSelectedRegions());
-			return true;
-		case R.id.roadWorksOption:
-			if( item.isChecked())
-			{
-				flipMenuItem(item, false, R.string.roadWorksHidden, R.drawable.menu_roadworks);
-				TrafficProvider.setSetting(getContentResolver(), TrafficProvider.SET_ROADWORKS, "0");
-			}
-			else
-			{
-				flipMenuItem(item, true, R.string.roadWorksShown, R.drawable.menu_roadworks_disabled);
-				TrafficProvider.setSetting(getContentResolver(), TrafficProvider.SET_ROADWORKS, "1");
-			}
-			updateTrafficNews(getSelectedRegions());
-			return true;
 		case R.id.ViewSwitchMenu:
 			switchView();
+			return true;
+		case R.id.menu_settings:
+			Intent settingsActivity = new Intent(getBaseContext(),
+                    Preferences.class);
+			startActivityForResult(settingsActivity, 1);
 			return true;
 		case R.id.About:
 			AboutDialog.create(this).show();
@@ -723,9 +673,9 @@ public class TrafficChecker extends MapActivity {
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		super.onActivityResult(requestCode, resultCode, data);
 		TrafficProvider.setSetting(getContentResolver(), TrafficProvider.SET_REGION, getSelectedRegions());
 		updateTrafficNews(getSelectedRegions());
+		super.onActivityResult(requestCode, resultCode, data);
 	}
 
 	private void showProgressDialog() {
