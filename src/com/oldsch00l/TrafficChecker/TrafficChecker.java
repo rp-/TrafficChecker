@@ -59,6 +59,8 @@ public class TrafficChecker extends MapActivity {
 	private ListView reportListView;
 	private ViewSwitcher viewSwitcherMain;
 	private TrafficParser trafficParser;
+
+	// This handler is called after the traffic parsing is finished
 	private RefreshHandler mRefreshHandler = new RefreshHandler();
 	private Menu mOptionsMenu;
 	private ProgressDialog refreshDialog;
@@ -307,6 +309,14 @@ public class TrafficChecker extends MapActivity {
 			showProgressDialog();
 	}
 
+	/**
+	 * This method should be called to update the traffic news.
+	 *
+	 * It creates a new parser thread and starts it, after the parser
+	 * is finished it will call the mRefreshHandler and update the gui.
+	 *
+	 * @param sRegions Regions to get traffic news in a comma seperated list.
+	 */
 	public void updateTrafficNews(String sRegions) {
 		trafficParser = new TrafficParser( getApplicationContext(), mRefreshHandler);
 		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);

@@ -19,6 +19,16 @@ or an error occurs ;)
 You can click a traffic item and it will lead you to the map, to
 switch back to the text view hit the back button or check the menu.
 
+-------------
+Contributions
+-------------
+
+Sadly I have to admit that my code is poorly documented, but atleast most
+of the code is not very complex and easy to understand. 
+Feel free to ask question via mail or github.
+If you want to improve or fix some bugs, feel free to fork and make a pull
+request via github.
+
 -------
 License
 -------

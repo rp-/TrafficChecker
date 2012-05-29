@@ -18,6 +18,9 @@
  *  along with TrafficChecker.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+// This provider is mostly unused, currently its only use is to
+// get the current selected regions and if the text or map view is shown.
+
 package com.oldsch00l.TrafficChecker;
 
 import android.content.ContentProvider;
