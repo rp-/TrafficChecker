@@ -88,11 +88,8 @@ public class TrafficProvider extends ContentProvider {
 	public static final int KEYS_KEY = 0;
 	public static final int KEYS_VALUE = 1;
 
-	public static final String SET_TRAFFIC = "traffic";
-	public static final String SET_ROADWORKS = "roadworks";
 	public static final String SET_REGION = "region";
 	public static final String SET_VIEW = "view";
-	public static final String SET_ORDER = "order";
 
 	@Override
 	public boolean onCreate() {
@@ -394,15 +391,9 @@ public class TrafficProvider extends ContentProvider {
 			//db.execSQL( CREATETABLE_GEOPOINTS);
 			db.execSQL( CREATETABLE_SETTINGS);
 			db.execSQL( "INSERT INTO " + TABLE_SETTINGS + "( "
-					+ COLS_KEY + ", " + COLS_VALUE + ") VALUES ('" + SET_TRAFFIC + "', 1)" );
-			db.execSQL( "INSERT INTO " + TABLE_SETTINGS + "( "
-					+ COLS_KEY + ", " + COLS_VALUE + ") VALUES ('" + SET_ROADWORKS + "', 0)" );
-			db.execSQL( "INSERT INTO " + TABLE_SETTINGS + "( "
 					+ COLS_KEY + ", " + COLS_VALUE + ") VALUES ('" + SET_REGION + "', '')" );
 			db.execSQL( "INSERT INTO " + TABLE_SETTINGS + "( "
 					+ COLS_KEY + ", " + COLS_VALUE + ") VALUES ('" + SET_VIEW + "', 'text')" );
-			db.execSQL( "INSERT INTO " + TABLE_SETTINGS + "( "
-					+ COLS_KEY + ", " + COLS_VALUE + ") VALUES ('" + SET_ORDER + "', 'location')" );
 		}
 
 		@Override
@@ -416,11 +407,6 @@ public class TrafficProvider extends ContentProvider {
 			{
 				db.execSQL( "INSERT INTO " + TABLE_SETTINGS + "( "
 					+ COLS_KEY + ", " + COLS_VALUE + ") VALUES ('" + SET_VIEW + "', 'text')" );
-			}
-			else if( newVersion == 10 )
-			{
-				db.execSQL( "INSERT INTO " + TABLE_SETTINGS + "( "
-						+ COLS_KEY + ", " + COLS_VALUE + ") VALUES ('" + SET_ORDER + "', 'location')" );
 			}
 			Log.w("TrafficProvider", "Finished upgrade");
 		}
