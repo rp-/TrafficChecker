@@ -280,10 +280,10 @@ public class TrafficChecker extends MapActivity {
 							new DialogInterface.OnClickListener() {
 								public void onClick(DialogInterface dialog,
 										int id) {
-									Intent addCarIntent = new Intent(
+									Intent selectRegion = new Intent(
 											getBaseContext(),
 											SelectRegionActivity.class);
-									startActivityForResult(addCarIntent, 0);
+									startActivityForResult(selectRegion, 0);
 								}
 							});
 			dialog = builder.create();
