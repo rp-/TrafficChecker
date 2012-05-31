@@ -32,6 +32,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -67,6 +68,10 @@ public class TrafficChecker extends MapActivity {
 	private static boolean mProgressDialogShowing = false;
 
 	static final int DIALOG_FIRST_START_ID = 0;
+
+	// Preference keys
+	static final String PREF_REGIONS = "regions";
+	static final String PREF_VIEW = "view";
 
 	final static String EN_NORTHEAST = "NorthEast.xml";
 	final static String EN_NORTHWEST = "NorthWest.xml";
@@ -253,7 +258,20 @@ public class TrafficChecker extends MapActivity {
 		iconRoadCondition = getResources().getDrawable(R.drawable.icon_roadcondition);
 
 
-		String strRegions = TrafficProvider.getSetting( getContentResolver(), TrafficProvider.SET_REGION);
+		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+		String strRegions = sp.getString(PREF_REGIONS, "");
+
+		//upgrade code
+		//TODO remove this after any version after 1.5.0 and get rid of TrafficProvider
+		if(strRegions.length() == 0)
+		{
+			strRegions = TrafficProvider.getSetting( getContentResolver(), TrafficProvider.SET_REGION);
+			Editor e = sp.edit();
+			e.putString(PREF_REGIONS, strRegions);
+			e.commit();
+		}
+
+
 		if (strRegions.length() == 0) {
 			showDialog(DIALOG_FIRST_START_ID);
 		} else {
@@ -262,7 +280,8 @@ public class TrafficChecker extends MapActivity {
 			updateTrafficNews(getSelectedRegions());
 		}
 
-		if( TrafficProvider.getSetting(getContentResolver(), TrafficProvider.SET_VIEW).equals("map") )
+		String curView = sp.getString(PREF_VIEW, "text");
+		if( curView.equals("map") )
 			switchView(true);
 	}
 
@@ -405,7 +424,9 @@ public class TrafficChecker extends MapActivity {
 
 		//restore settings
 		MenuItem viewSwitchItem = menu.findItem( R.id.ViewSwitchMenu);
-		if( TrafficProvider.getSetting(getContentResolver(), TrafficProvider.SET_VIEW).equals("map") )
+		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+		final String curView = sp.getString(PREF_VIEW, "text");
+		if( curView.equals("map") )
 			flipMenuItem(viewSwitchItem, true, R.string.text, R.drawable.menu_text);
 		else
 			flipMenuItem(viewSwitchItem, false, R.string.map, R.drawable.menu_map);
@@ -470,7 +491,9 @@ public class TrafficChecker extends MapActivity {
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
-			if( TrafficProvider.getSetting(getContentResolver(), TrafficProvider.SET_VIEW).equals("map"))
+			SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+			final String curView = sp.getString(PREF_VIEW, "text");
+			if( curView.equals("map"))
 			{
 				switchView();
 				return true;
@@ -656,15 +679,21 @@ public class TrafficChecker extends MapActivity {
 		{
 			if( mOptionsMenu != null )
 				viewSwitchItem = mOptionsMenu.findItem( R.id.ViewSwitchMenu);
-			if( TrafficProvider.getSetting(getContentResolver(), TrafficProvider.SET_VIEW).equals("text"))
+			SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+			final String curView = sp.getString(PREF_VIEW, "text");
+			if( curView.equals("text"))
 			{
 				flipMenuItem(viewSwitchItem, true, R.string.text, R.drawable.menu_text);
-				TrafficProvider.setSetting(getContentResolver(), TrafficProvider.SET_VIEW, "map");
+				Editor e = sp.edit();
+				e.putString(PREF_VIEW, "map");
+				e.commit();
 			}
 			else
 			{
 				flipMenuItem(viewSwitchItem, false, R.string.map, R.drawable.menu_map);
-				TrafficProvider.setSetting(getContentResolver(), TrafficProvider.SET_VIEW, "text");
+				Editor e = sp.edit();
+				e.putString(PREF_VIEW, "text");
+				e.commit();
 			}
 		}
 
@@ -683,7 +712,11 @@ public class TrafficChecker extends MapActivity {
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		TrafficProvider.setSetting(getContentResolver(), TrafficProvider.SET_REGION, getSelectedRegions());
+		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+		Editor e = sp.edit();
+		e.putString(PREF_REGIONS, getSelectedRegions());
+		e.commit();
+		//TrafficProvider.setSetting(getContentResolver(), TrafficProvider.SET_REGION, getSelectedRegions());
 		updateTrafficNews(getSelectedRegions());
 		super.onActivityResult(requestCode, resultCode, data);
 	}
