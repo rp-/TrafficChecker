@@ -421,14 +421,14 @@ public class TrafficChecker extends MapActivity {
 
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
-		if( RegionMap.keySet().contains(item.getItemId()) ) {
-			RegionMap.get(item.getItemId()).setSelected(!RegionMap.get(item.getItemId()).isSelected());
-			TrafficProvider.setSetting(getContentResolver(), TrafficProvider.SET_REGION, getSelectedRegions());
-			updateTrafficNews(getSelectedRegions());
-			return true;
-		}
-		else
-			return super.onContextItemSelected(item);
+//		if( RegionMap.keySet().contains(item.getItemId()) ) {
+//			RegionMap.get(item.getItemId()).setSelected(!RegionMap.get(item.getItemId()).isSelected());
+//			TrafficProvider.setSetting(getContentResolver(), TrafficProvider.SET_REGION, getSelectedRegions());
+//			updateTrafficNews(getSelectedRegions());
+//			return true;
+//		}
+//		else
+		return super.onContextItemSelected(item);
 	}
 
 	public void openSelectRegionActivity(View view) {
