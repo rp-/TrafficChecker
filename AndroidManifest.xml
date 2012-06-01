@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="com.oldsch00l.TrafficChecker"
-      android:versionCode="22" android:versionName="1.4.9">
+      android:versionCode="23" android:versionName="1.5.0">
 	<uses-sdk android:minSdkVersion="4" android:targetSdkVersion="13"/>
 	<uses-permission android:name="android.permission.INTERNET"></uses-permission>
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
