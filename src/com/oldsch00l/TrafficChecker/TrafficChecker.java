@@ -334,7 +334,7 @@ public class TrafficChecker extends MapActivity {
 	 * It creates a new parser thread and starts it, after the parser
 	 * is finished it will call the mRefreshHandler and update the gui.
 	 *
-	 * @param sRegions Regions to get traffic news in a comma seperated list.
+	 * @param sRegions Regions to get traffic news in a comma separated list.
 	 */
 	public void updateTrafficNews(String sRegions) {
 		trafficParser = new TrafficParser( getApplicationContext(), mRefreshHandler);
