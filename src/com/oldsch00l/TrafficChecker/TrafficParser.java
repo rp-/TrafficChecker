@@ -107,12 +107,12 @@ public class TrafficParser extends Thread {
 						Location.distanceBetween(gpA.getLatitudeE6() / 1E6,
 								gpA.getLongitudeE6() / 1E6,
 								loc.getLatitude(), loc.getLongitude(), res);
-						Float distA = new Float(res[0]);
+						Float distA = Float.valueOf(res[0]);
 
 						Location.distanceBetween(gpB.getLatitudeE6() / 1E6,
 								gpB.getLongitudeE6() / 1E6,
 								loc.getLatitude(), loc.getLongitude(), res);
-						Float distB = new Float(res[0]);
+						Float distB = Float.valueOf(res[0]);
 
 						return distA.compareTo(distB);
 					}
