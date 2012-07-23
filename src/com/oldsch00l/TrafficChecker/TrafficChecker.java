@@ -295,7 +295,7 @@ public class TrafficChecker extends MapActivity {
 					String.format(getString(R.string.first_start),
 							getString(R.string.app_name)))
 					.setCancelable(false)
-					.setPositiveButton("Ok",
+					.setPositiveButton(android.R.string.ok,
 							new DialogInterface.OnClickListener() {
 								public void onClick(DialogInterface dialog,
 										int id) {

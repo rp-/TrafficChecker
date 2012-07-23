@@ -52,6 +52,6 @@ public class AboutDialog {
 
 		return new AlertDialog.Builder(context).setTitle(R.string.about)
 				.setCancelable(true).setIcon(android.R.drawable.ic_dialog_info)
-				.setPositiveButton(R.string.ok, null).setView(message).create();
+				.setPositiveButton(android.R.string.ok, null).setView(message).create();
 	}
 }

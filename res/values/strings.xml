@@ -16,7 +16,6 @@
 	<string name="date">Date</string>
 	<string name="location">Location</string>
 	<string name="selectRegion">Select region...</string>
-	<string name="ok">Ok</string>
 	<string name="about">About</string>
 	<string name="refreshDialogText">Fetching traffic news...</string>
 	<string name="aboutdialogmessage">Author: Rene Peinthor\nVersion: %s \nLicense: GPLv3\nhttp://github.com/rp-/TrafficChecker\n\nAustrian traffic data provided by\nÖmtc(www.oeamtc.at)\nGerman traffic data provided by\nOneStepAhead(http://www.onestepahead.de)\nEngland traffic data provided by Highways Agency(http://www.highways.gov.uk)</string>
