@@ -62,7 +62,7 @@ public class TrafficChecker extends MapActivity {
 	private TrafficParser trafficParser;
 
 	// This handler is called after the traffic parsing is finished
-	private RefreshHandler mRefreshHandler = new RefreshHandler();
+	private RefreshHandler mRefreshHandler = new RefreshHandler(this);
 	private Menu mOptionsMenu;
 	private ProgressDialog refreshDialog;
 	private static boolean mProgressDialogShowing = false;
@@ -731,11 +731,16 @@ public class TrafficChecker extends MapActivity {
 		refreshDialog.dismiss();
 	}
 
-	class RefreshHandler extends Handler {
+	static class RefreshHandler extends Handler {
+		private TrafficChecker myTC;
+		public RefreshHandler(TrafficChecker tc) {
+			myTC = tc;
+		}
+
 		@Override
 		public void  handleMessage  (android.os.Message msg) {
-			refreshMapAndReportList();
-			dismissProgressDialog();
+			myTC.refreshMapAndReportList();
+			myTC.dismissProgressDialog();
 		}
 	}
 }
