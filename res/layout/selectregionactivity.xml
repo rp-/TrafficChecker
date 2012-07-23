@@ -5,7 +5,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     >
-	<Button android:layout_height="wrap_content" android:id="@+id/OkButton" android:text="@string/ok" android:layout_width="fill_parent" android:onClick="closeAndSave"/>
+	<Button android:layout_height="wrap_content" android:id="@+id/OkButton" android:text="@android:string/ok" android:layout_width="fill_parent" android:onClick="closeAndSave"/>
 	
 
 <ListView android:id="@+id/ListViewRegion" android:layout_width="fill_parent" android:layout_height="fill_parent"></ListView>

@@ -46,7 +46,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.ViewSwitcher;
 
 import com.google.android.maps.GeoPoint;
@@ -60,6 +62,8 @@ public class TrafficChecker extends MapActivity {
 	private ListView reportListView;
 	private ViewSwitcher viewSwitcherMain;
 	private TrafficParser trafficParser;
+
+	private Spinner spinnerDateFilter;
 
 	// This handler is called after the traffic parsing is finished
 	private RefreshHandler mRefreshHandler = new RefreshHandler(this);
@@ -241,6 +245,9 @@ public class TrafficChecker extends MapActivity {
 
 		reportListView.setOnItemClickListener(new ListItemClickListener());
 
+		// date filter spinner
+		spinnerDateFilter = (Spinner) findViewById(R.id.spinnerDate);
+
 		//map activity
 		mMapView.setBuiltInZoomControls(true);
 
@@ -271,6 +278,15 @@ public class TrafficChecker extends MapActivity {
 			e.commit();
 		}
 
+		// set last hours spinner
+		java.util.Hashtable<Integer, Integer> mapHourFilterSpinner = new java.util.Hashtable<Integer, Integer>();
+		mapHourFilterSpinner.put(Integer.valueOf(0), Integer.valueOf(2));
+		mapHourFilterSpinner.put(Integer.valueOf(24), Integer.valueOf(0));
+		mapHourFilterSpinner.put(Integer.valueOf(48), Integer.valueOf(1));
+		spinnerDateFilter.setSelection(mapHourFilterSpinner.get(sp.getInt("hourfilter", 0)));
+
+		// after setting the correct spinner value, we can hook up the selection changed listener
+		spinnerDateFilter.setOnItemSelectedListener(new DateFilterSelectedListener());
 
 		if (strRegions.length() == 0) {
 			showDialog(DIALOG_FIRST_START_ID);
@@ -341,10 +357,12 @@ public class TrafficChecker extends MapActivity {
 		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
 		boolean bTraffic = sp.getBoolean("traffic", true);
 		boolean bRoadWorks = sp.getBoolean("roadworks", true);
+		int hourFilter = sp.getInt("hourfilter", 0);
 		String sOrder = sp.getString("orderby", "location");
 		trafficParser.setFilter(bTraffic, bRoadWorks);
 		trafficParser.setOrderBy(sOrder);
 		trafficParser.setRegionList(sRegions);
+		trafficParser.setLastHourFilter(hourFilter);
 		trafficParser.start();
 		showProgressDialog();
 	}
@@ -666,6 +684,44 @@ public class TrafficChecker extends MapActivity {
 				}
 			}
 		}
+	}
+
+	private class DateFilterSelectedListener implements OnItemSelectedListener {
+
+		@Override
+		/**
+		 * @arg position 0 -> last 24h
+		 *               1 -> last 48h
+		 *               2 -> all
+		 */
+		public void onItemSelected(AdapterView<?> adapterview, View view, int position,
+				long id) {
+			SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(view.getContext());
+			Editor e = sp.edit();
+
+			switch(position)
+			{
+			case 0: {
+				e.putInt( "hourfilter", 24);
+			}
+			break;
+			case 1: {
+				e.putInt( "hourfilter", 48);
+			}
+			break;
+			case 2: {
+				e.putInt( "hourfilter", 0);
+			}
+			break;
+			}
+			e.commit();
+			updateTrafficNews(getSelectedRegions());
+		}
+
+		@Override
+		public void onNothingSelected(AdapterView<?> adapterview) {
+		}
+
 	}
 
 	private void switchView() {

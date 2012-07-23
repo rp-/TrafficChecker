@@ -100,4 +100,10 @@
 	    <item>Date</item>
 	    <item>Location</item>
 	</string-array>
+
+	<string-array name="datefilter">
+	    <item>Last 24 hours</item>
+	    <item>Last 48 hours</item>
+	    <item>All</item>
+	</string-array>
 </resources>

@@ -23,6 +23,7 @@ package com.oldsch00l.TrafficChecker;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 
@@ -46,6 +47,7 @@ public class TrafficParser extends Thread {
 	public static final long cacheDiff = 180000;
 	private String mStringRegionList;
 	private String mOrderBy;
+	private int mLastHours;
 	private java.util.List<Message> mResultList;
 	private ArrayList<Message.SubType> mSubTypeFilterList;
 	private Context mContext;
@@ -62,6 +64,10 @@ public class TrafficParser extends Thread {
 
 	public synchronized java.util.List<Message> getResultList() {
 		return mResultList;
+	}
+
+	public void setLastHourFilter(final int hours) {
+		mLastHours = hours;
 	}
 
 	protected java.util.List<Message> getTrafficNews( String regionList) {
@@ -214,6 +220,22 @@ public class TrafficParser extends Thread {
 		return list;
 	}
 
+	protected List<Message> filterLastHours(java.util.List<Message> listToFilter) {
+		if( mLastHours > 0) {
+			GregorianCalendar gcUntil = new GregorianCalendar();
+			gcUntil.add(GregorianCalendar.HOUR, mLastHours * -1);
+			List<Message> filteredList = new ArrayList<Message>();
+			for (Message message : listToFilter) {
+				if( message.getDate().after(gcUntil.getTime())) {
+					filteredList.add(message);
+				}
+			}
+
+			return filteredList;
+		}
+		return listToFilter;
+	}
+
 	protected List<Message> filterListBySubType(java.util.List<Message> listToFilter, java.util.List<Message.SubType> filterList) {
 		List<Message> filteredList = new ArrayList<Message>();
 		for (Message message : listToFilter) {
@@ -323,13 +345,15 @@ public class TrafficParser extends Thread {
 		if( bRoadWorks )
 			mSubTypeFilterList.add(SubType.ROADWORKS);
 	}
-	
+
 	public void setOrderBy( String sOrder) {
 		mOrderBy = sOrder;
 	}
 
 	public void run() {
-		mResultList = filterListBySubType(getTrafficNews(mStringRegionList), mSubTypeFilterList);
+		List<Message> result = getTrafficNews(mStringRegionList);
+		result = filterLastHours(result);
+		mResultList = filterListBySubType(result, mSubTypeFilterList);
 		mNotifier.sendEmptyMessage(0);
 	}
 }
