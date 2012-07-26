@@ -27,6 +27,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class TrafficAdapter extends BaseAdapter {
@@ -73,7 +74,7 @@ public class TrafficAdapter extends BaseAdapter {
 		{
 			convertView = mInflater.inflate(R.layout.list_item_header, null);
 			TextView tv = (TextView) convertView.findViewById(R.id.listtextview);
-			
+
 			int count = index + 1;
 			while( count < mItems.size() && mItems.get(count).getType() != Message.Type.HEADER) count++;
 			tv.setText(msg.getTitle() + " (" + (count - index - 1) + ")");
@@ -83,6 +84,7 @@ public class TrafficAdapter extends BaseAdapter {
 			convertView = mInflater.inflate(R.layout.list_item, null);
 			TextView tvTitle = (TextView) convertView.findViewById(R.id.listitemTVTitle);
 			TextView tv = (TextView) convertView.findViewById(R.id.listtextview);
+			ImageView ivIcon = (ImageView) convertView.findViewById(R.id.listitemicon);
 
 			tvTitle.setText(msg.getTitle());
 			StringBuilder sb = new StringBuilder();
@@ -95,6 +97,19 @@ public class TrafficAdapter extends BaseAdapter {
 				sb.append(msg.getDescription());
 			}
 			tv.setText(sb.toString());
+
+			switch(msg.getSubtype()) {
+			case ROADWORKS: {
+				ivIcon.setImageResource(R.drawable.menu_roadworks);
+			}
+			break;
+			case ROADCONDITION: {
+				ivIcon.setImageResource(R.drawable.m_roadcondition);
+			}
+			default: {
+				ivIcon.setImageResource(R.drawable.menu_traffic);
+			}
+			}
 		}
 		return convertView;
 	}
