@@ -286,7 +286,7 @@ public class TrafficChecker extends MapActivity {
 		spinnerDateFilter.setSelection(mapHourFilterSpinner.get(sp.getInt("hourfilter", 0)));
 
 		// after setting the correct spinner value, we can hook up the selection changed listener
-		spinnerDateFilter.setOnItemSelectedListener(new DateFilterSelectedListener());
+		spinnerDateFilter.setOnItemSelectedListener(new DateFilterSelectedListener(this));
 
 		if (strRegions.length() == 0) {
 			showDialog(DIALOG_FIRST_START_ID);
@@ -687,7 +687,11 @@ public class TrafficChecker extends MapActivity {
 	}
 
 	private class DateFilterSelectedListener implements OnItemSelectedListener {
+		private TrafficChecker myTrafficChecker;
 
+		public DateFilterSelectedListener(TrafficChecker tc) {
+			myTrafficChecker = tc;
+		}
 		@Override
 		/**
 		 * @arg position 0 -> last 24h
@@ -696,7 +700,7 @@ public class TrafficChecker extends MapActivity {
 		 */
 		public void onItemSelected(AdapterView<?> adapterview, View view, int position,
 				long id) {
-			SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(view.getContext());
+			SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(myTrafficChecker);
 			Editor e = sp.edit();
 
 			switch(position)
