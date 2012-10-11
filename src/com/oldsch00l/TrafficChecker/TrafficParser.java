@@ -94,12 +94,12 @@ public class TrafficParser extends Thread {
 						return 0;
 					}
 
-					if (mA.getGeoDataList() != null)
+					if (mA.getGeoDataList() != null && mA.getGeoDataList().size() > 0)
 						gpA = mA.getGeoDataList().get(0);
 					else
 						return -1;
 
-					if (mB.getGeoDataList() != null)
+					if (mB.getGeoDataList() != null && mB.getGeoDataList().size() > 0)
 						gpB = mB.getGeoDataList().get(0);
 					else
 						return 1;
