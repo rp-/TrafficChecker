@@ -27,11 +27,7 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 
-import android.content.ContentResolver;
-import android.content.ContentValues;
 import android.content.Context;
-import android.database.SQLException;
-import android.database.sqlite.SQLiteDatabase;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
@@ -245,89 +241,6 @@ public class TrafficParser extends Thread {
 			}
 		}
 		return filteredList;
-	}
-
-	protected void updateContentProvider(Context context, ContentResolver cr, java.util.List<Message> messages, String state) {
-
-//		long startTime = System.currentTimeMillis();
-
-		TrafficProvider.trafficDatabaseHelper dbHelper =
-			new TrafficProvider.trafficDatabaseHelper( context, TrafficProvider.DATABASE_NAME, null, TrafficProvider.DATABASE_VERSION);
-		SQLiteDatabase tDB = dbHelper.getWritableDatabase();
-
-		try {
-			tDB.beginTransaction();
-
-			String where = TrafficProvider.COLT_REGION + "='" + state + "'";
-			where = "_id in (select g._id from " + TrafficProvider.TABLE_GEOPOINTS;
-			where += " g, " + TrafficProvider.TABLE_TRAFFIC + " t ";
-			where += "WHERE t._id = g._trafficid AND t.region='" + state + "');";
-			tDB.delete(TrafficProvider.TABLE_GEOPOINTS, where, null);
-			tDB.delete(TrafficProvider.TABLE_TRAFFIC, where, null);
-
-			for (Message msg : messages) {
-				ContentValues cvTraffic = msg.getContentValues();
-				cvTraffic.put(TrafficProvider.COLT_REGION, state);
-				long trafficId = tDB.insert(TrafficProvider.TABLE_TRAFFIC, null, cvTraffic);
-				// add geopoints
-				for (GeoPoint geopoint : msg.getGeoDataList()) {
-					ContentValues cv = new ContentValues();
-					cv.put( TrafficProvider.COLP_TRAFFICID, trafficId);
-					cv.put( TrafficProvider.COLP_LAT, geopoint.getLatitudeE6());
-					cv.put( TrafficProvider.COLP_LONG, geopoint.getLongitudeE6());
-					tDB.insert(TrafficProvider.TABLE_GEOPOINTS, null, cv);
-				}
-			}
-			tDB.setTransactionSuccessful();
-		} catch (SQLException e) {
-			Log.e("SQL", e.getLocalizedMessage());
-		} finally {
-			tDB.endTransaction();
-		}
-		tDB.close();
-
-		/* This was the version using ContentResolvers
-		 * which is awful slow on lot of rows.
-		 *
-
-		//remove old entries
-		String where = TrafficProvider.COLT_REGION + "='" + state + "'";
-		Cursor cTraffic = cr.query( TrafficProvider.CONTENT_URI_TRAFFIC, null, where, null, null);
-		if( cTraffic.moveToFirst() )
-		{
-			do {
-				cr.delete(
-					TrafficProvider.CONTENT_URI_GEOPOINTS,
-					TrafficProvider.COLP_TRAFFICID + "=?",
-					new String[]{cTraffic.getString(TrafficProvider.KEYP_TRAFFICID)}
-				);
-			} while( cTraffic.moveToNext());
-		}
-		cTraffic.close();
-		cr.delete(TrafficProvider.CONTENT_URI_TRAFFIC, where, null);
-
-		for (Message msg : messages) {
-			ContentValues cvTraffic = msg.getContentValues();
-			cvTraffic.put(TrafficProvider.COLT_REGION, state);
-			Uri uri = cr.insert(TrafficProvider.CONTENT_URI_TRAFFIC, cvTraffic);
-			// add geopoints
-			if( uri != null) {
-				long trafficId = Long.parseLong( uri.getPathSegments().get(1) );
-				ContentValues[] geopoints = new ContentValues[msg.getGeoDataList().size()];
-				int i = 0;
-				for (GeoPoint geopoint : msg.getGeoDataList()) {
-					ContentValues cv = new ContentValues();
-					cv.put( TrafficProvider.COLP_TRAFFICID, trafficId);
-					cv.put( TrafficProvider.COLP_LAT, geopoint.getLatitudeE6());
-					cv.put( TrafficProvider.COLP_LONG, geopoint.getLongitudeE6());
-					geopoints[i++] = cv;
-				}
-				cr.bulkInsert(TrafficProvider.CONTENT_URI_GEOPOINTS, geopoints);
-			}
-		}
-		*/
-//		long endTime = System.currentTimeMillis();
-//		Log.w("profile", "Time: " + new Long(endTime - startTime));
 	}
 
 	public void clearCache() {

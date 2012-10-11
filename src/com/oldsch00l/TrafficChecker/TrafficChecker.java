@@ -265,16 +265,6 @@ public class TrafficChecker extends MapActivity {
 		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
 		String strRegions = sp.getString(PREF_REGIONS, "");
 
-		//upgrade code
-		//TODO remove this after any version after 1.5.0 and get rid of TrafficProvider
-		if(strRegions.length() == 0)
-		{
-			strRegions = TrafficProvider.getSetting( getContentResolver(), TrafficProvider.SET_REGION);
-			Editor e = sp.edit();
-			e.putString(PREF_REGIONS, strRegions);
-			e.commit();
-		}
-
 		// set last hours spinner
 		java.util.Hashtable<Integer, Integer> mapHourFilterSpinner = new java.util.Hashtable<Integer, Integer>();
 		mapHourFilterSpinner.put(Integer.valueOf(0), Integer.valueOf(2));

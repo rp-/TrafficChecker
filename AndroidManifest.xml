@@ -27,6 +27,5 @@
 		        android:label="@string/settings">
 		</activity>
         <uses-library android:name="com.google.android.maps" />
-    <provider android:name=".TrafficProvider" android:authorities="com.oldsch00l.provider.TrafficChecker"></provider>
 </application>
 </manifest> 

@@ -27,8 +27,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import android.content.ContentValues;
-
 import com.google.android.maps.GeoPoint;
 
 public class Message implements Comparable<Message>{
@@ -283,17 +281,5 @@ public class Message implements Comparable<Message>{
 		if (another == null) return 1;
 		// sort descending, most recent first
 		return another.date.compareTo(date);
-	}
-
-	public ContentValues getContentValues() {
-		//needs update
-		ContentValues cv = new ContentValues();
-
-		cv.put( TrafficProvider.COLT_TITLE, title);
-		cv.put( TrafficProvider.COLT_DESC, description);
-		cv.put( TrafficProvider.COLT_LINK, link.toString());
-		cv.put( TrafficProvider.COLT_SUBTYPE, getSubtype().ordinal());
-		cv.put( TrafficProvider.COLT_DATE, date.getTime());
-		return cv;
 	}
 }
