@@ -77,53 +77,58 @@ public class TrafficParser extends Thread {
 	}
 
 	private void sortNews(java.util.List<Message> list) {
-		LocationManager lm = (LocationManager) mContext
-				.getSystemService(Context.LOCATION_SERVICE);
-		Criteria crit = new Criteria();
-		crit.setAccuracy(Criteria.ACCURACY_FINE);
-		String provider = lm.getBestProvider(crit, true);
-		if(provider != null && mOrderBy.equals("location")) {
-			final Location loc = lm.getLastKnownLocation(provider);
-			Collections.sort(list, new Comparator<Message>() {
-				public int compare(Message mA, Message mB) {
-					GeoPoint gpA;
-					GeoPoint gpB;
-
-					if (mA.getGeoDataList() == null
-							&& mB.getGeoDataList() == null) {
-						return 0;
+		if(list != null && list.size() > 0)
+		{
+			LocationManager lm = (LocationManager) mContext
+					.getSystemService(Context.LOCATION_SERVICE);
+			Criteria crit = new Criteria();
+			crit.setAccuracy(Criteria.ACCURACY_FINE);
+			String provider = lm.getBestProvider(crit, true);
+			if(provider != null && mOrderBy.equals("location")) {
+				final Location loc = lm.getLastKnownLocation(provider);
+				Collections.sort(list, new Comparator<Message>() {
+					public int compare(Message mA, Message mB) {
+						GeoPoint gpA;
+						GeoPoint gpB;
+	
+						
+						
+						if (mA.getGeoDataList() == null
+								&& mB.getGeoDataList() == null) {
+							return 0;
+						}
+	
+						if (mA.getGeoDataList() != null && mA.getGeoDataList().size() > 0)
+							gpA = mA.getGeoDataList().get(0);
+						else
+							return -1;
+	
+						if (mB.getGeoDataList() != null && mB.getGeoDataList().size() > 0)
+							gpB = mB.getGeoDataList().get(0);
+						else
+							return 1;
+	
+						if (loc != null) {
+							float[] res = new float[2];
+							Location.distanceBetween(gpA.getLatitudeE6() / 1E6,
+									gpA.getLongitudeE6() / 1E6,
+									loc.getLatitude(), loc.getLongitude(), res);
+							Float distA = Float.valueOf(res[0]);
+	
+							Location.distanceBetween(gpB.getLatitudeE6() / 1E6,
+									gpB.getLongitudeE6() / 1E6,
+									loc.getLatitude(), loc.getLongitude(), res);
+							Float distB = Float.valueOf(res[0]);
+	
+							return distA.compareTo(distB);
+						}
+						return mA.compareTo(mB);
 					}
-
-					if (mA.getGeoDataList() != null && mA.getGeoDataList().size() > 0)
-						gpA = mA.getGeoDataList().get(0);
-					else
-						return -1;
-
-					if (mB.getGeoDataList() != null && mB.getGeoDataList().size() > 0)
-						gpB = mB.getGeoDataList().get(0);
-					else
-						return 1;
-
-					if (loc != null) {
-						float[] res = new float[2];
-						Location.distanceBetween(gpA.getLatitudeE6() / 1E6,
-								gpA.getLongitudeE6() / 1E6,
-								loc.getLatitude(), loc.getLongitude(), res);
-						Float distA = Float.valueOf(res[0]);
-
-						Location.distanceBetween(gpB.getLatitudeE6() / 1E6,
-								gpB.getLongitudeE6() / 1E6,
-								loc.getLatitude(), loc.getLongitude(), res);
-						Float distB = Float.valueOf(res[0]);
-
-						return distA.compareTo(distB);
-					}
-					return mA.compareTo(mB);
-				}
-			});
-		} else {
-			// sort by date
-			Collections.sort( list);
+				});
+			} else {
+				// sort by date
+				Collections.sort( list);
+			}
 		}
 	}
 
